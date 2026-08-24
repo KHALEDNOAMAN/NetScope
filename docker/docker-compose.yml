@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  netscope:
+    build: .
+    container_name: netscope
+    network_mode: "host" # Required for packet capture
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
