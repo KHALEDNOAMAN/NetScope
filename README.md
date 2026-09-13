@@ -59,3 +59,9 @@ NetScope utilizes Scapy for raw socket packet capture and psutil for cross-platf
 
 ## License
 MIT License
+
+
+## Project Structure
+- `backend/` (app/, routers/, services/)
+- `frontend/` (src/pages/, components/)
+- `docker/`
