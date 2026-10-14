@@ -1,5 +1,7 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
+import os
+
 import uvicorn
 import asyncio
 import json
@@ -40,4 +42,11 @@ async def websocket_bandwidth(websocket: WebSocket):
         print(f"WebSocket Error: {e}")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # 0.0.0.0 exposes the dashboard on every interface, including the
+    # one your network can reach. That may be what you want on a lab
+    # box, so it stays possible, just not the default.
+    uvicorn.run(
+        app,
+        host=os.environ.get("NETSCOPE_HOST", "127.0.0.1"),
+        port=int(os.environ.get("NETSCOPE_PORT", "8000")),
+    )
