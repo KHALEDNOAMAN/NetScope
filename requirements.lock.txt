@@ -1,0 +1,57 @@
+# Generated, do not hand edit. Regenerate with:
+#   sed -E 's/[=<>!~].*//' requirements.txt | grep -E '^[A-Za-z]' > u.txt
+#   uv pip compile --python-version 3.11 -o requirements.lock.txt u.txt
+#   pip-audit -r requirements.lock.txt
+annotated-doc==0.0.5
+    # via fastapi
+annotated-types==0.8.0
+    # via pydantic
+anyio==4.15.1
+    # via starlette
+click==8.5.0
+    # via
+    #   -r C:/Users/Public/fxwork/NetScope/_u.txt
+    #   uvicorn
+fastapi==0.143.1
+    # via -r C:/Users/Public/fxwork/NetScope/_u.txt
+h11==0.16.0
+    # via uvicorn
+idna==3.20
+    # via anyio
+markdown-it-py==4.2.0
+    # via rich
+mdurl==0.1.2
+    # via markdown-it-py
+networkx==3.6.1
+    # via -r C:/Users/Public/fxwork/NetScope/_u.txt
+opentelemetry-api==1.45.1
+    # via fastapi
+psutil==7.2.2
+    # via -r C:/Users/Public/fxwork/NetScope/_u.txt
+pydantic==2.14.1
+    # via fastapi
+pydantic-core==2.50.1
+    # via pydantic
+pygments==2.21.0
+    # via rich
+rich==15.0.0
+    # via -r C:/Users/Public/fxwork/NetScope/_u.txt
+scapy==2.8.0
+    # via -r C:/Users/Public/fxwork/NetScope/_u.txt
+starlette==1.8.0
+    # via fastapi
+typing-extensions==4.16.0
+    # via
+    #   anyio
+    #   fastapi
+    #   opentelemetry-api
+    #   pydantic
+    #   pydantic-core
+    #   starlette
+    #   typing-inspection
+typing-inspection==0.4.4
+    # via
+    #   fastapi
+    #   pydantic
+uvicorn==0.54.0
+    # via -r C:/Users/Public/fxwork/NetScope/_u.txt
