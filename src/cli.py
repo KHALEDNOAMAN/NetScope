@@ -37,8 +37,7 @@ def monitor():
     try:
         live_monitor()
     except KeyboardInterrupt:
-        console.print("
-[bold red]Monitoring stopped.[/bold red]")
+        console.print("\n[bold red]Monitoring stopped.[/bold red]")
 
 @cli.command()
 @click.option('--interface', '-i', default='eth0', help='Network interface to capture on')
