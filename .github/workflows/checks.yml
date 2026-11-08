@@ -69,7 +69,7 @@ jobs:
       - name: tests
         run: |
           if ls tests/test_*.py >/dev/null 2>&1; then
-            uv venv && uv pip install -q -r requirements.txt pytest
+            uv pip install -q -r requirements.txt pytest
             uv run python -m pytest -q
           else
             echo "no tests yet"
