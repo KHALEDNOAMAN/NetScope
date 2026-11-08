@@ -1,6 +1,7 @@
-from scapy.all import sniff, wrpcap, TCP, UDP, ICMP, IP, DNS
 from collections import Counter
-import time
+
+from scapy.all import DNS, ICMP, IP, TCP, UDP, sniff, wrpcap
+
 
 class PacketAnalyzer:
     def __init__(self):

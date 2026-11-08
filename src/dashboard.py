@@ -1,10 +1,8 @@
-from fastapi import FastAPI, WebSocket
-from fastapi.staticfiles import StaticFiles
+import asyncio
 import os
 
 import uvicorn
-import asyncio
-import json
+from fastapi import FastAPI, WebSocket
 
 from .bandwidth_monitor import BandwidthMonitor
 from .scanner import scan_network

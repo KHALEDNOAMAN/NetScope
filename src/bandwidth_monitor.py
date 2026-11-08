@@ -1,8 +1,9 @@
-import psutil
 import time
+
+import psutil
 from rich.console import Console
-from rich.table import Table
 from rich.live import Live
+from rich.table import Table
 
 console = Console()
 

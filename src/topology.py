@@ -1,6 +1,8 @@
-import networkx as nx
-from scapy.all import sr1, IP, ICMP
 import json
+
+import networkx as nx
+from scapy.all import ICMP, IP, sr1
+
 
 class TopologyMapper:
     def __init__(self):

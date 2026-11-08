@@ -1,9 +1,10 @@
 import click
-from .scanner import scan_network, PortScanner
+from rich.console import Console
+
 from .bandwidth_monitor import live_monitor
 from .packet_analyzer import PacketAnalyzer
+from .scanner import PortScanner, scan_network
 from .topology import TopologyMapper
-from rich.console import Console
 
 console = Console()
 

@@ -1,7 +1,8 @@
 import socket
-from scapy.all import ARP, Ether, srp, conf
-from rich.table import Table
+
 from rich.console import Console
+from rich.table import Table
+from scapy.all import ARP, Ether, conf, srp
 
 console = Console()
 

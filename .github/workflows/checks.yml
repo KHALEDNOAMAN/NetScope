@@ -6,13 +6,20 @@ on:
   schedule:
     - cron: '0 6 * * 1'   # Monday, so a new CVE surfaces within a week
 
+# The default token can write to the repo. Nothing here needs that.
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Actions pinned to a commit, so a moved tag cannot change what runs here.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081 # v5
         with:
           python-version: '3.12'
 
@@ -20,8 +27,13 @@ jobs:
       - name: compile
         run: python -m compileall -q .
 
+      # ruff pinned, rules pinned in ruff.toml. An unpinned ruff turned this
+      # step red on its own when a release widened the default rule set.
       - name: lint
-        run: uvx ruff check --output-format github .
+        run: uvx ruff@0.17.4 check --output-format github .
+
+      - name: workflow audit
+        run: uvx zizmor@1.32.0 --offline --min-severity medium .github/workflows/
 
       # Audit what the resolver actually picks, not what requirements.txt
       # asks for. Pinning fastapi to a patched version still resolved a
@@ -48,7 +60,8 @@ jobs:
           if [ -f requirements.txt ] && [ -f requirements.lock.txt ]; then
             sed -E 's/[=<>!~].*//' requirements.txt | grep -E '^[A-Za-z]' > /tmp/u.txt
             uv pip compile -q --no-header --python-version 3.11 -o /tmp/fresh.txt /tmp/u.txt
-            if ! diff -q <(grep -v '^#' requirements.lock.txt) <(grep -v '^#' /tmp/fresh.txt) >/dev/null; then
+            # compare pins only; the '# via' comments carry machine-specific paths
+            if ! diff -q <(grep -E '^[A-Za-z]' requirements.lock.txt) <(grep -E '^[A-Za-z]' /tmp/fresh.txt) >/dev/null; then
               echo "::warning::requirements.lock.txt is behind what the resolver now picks. Regenerate it."
             fi
           fi
@@ -57,7 +70,7 @@ jobs:
         run: |
           if ls tests/test_*.py >/dev/null 2>&1; then
             uv venv && uv pip install -q -r requirements.txt pytest
-            uv run pytest -q
+            uv run python -m pytest -q
           else
             echo "no tests yet"
           fi
